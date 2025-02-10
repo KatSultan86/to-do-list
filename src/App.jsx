@@ -1,9 +1,14 @@
-import Logo from './components/Logo';
+import SubmissionForm from "./components/SubmissionForm";
+import ToDoListcard from "./components/ToDoListcard";
+import FullFormContainer from "./components/FullFormContainer";
 
 function App() {
   return (
     <>
-      <Logo />
+      {/* <FullFormContainer> */}
+      <SubmissionForm />
+      <ToDoListcard />
+      {/* </FullFormContainer> */}
     </>
   );
 }

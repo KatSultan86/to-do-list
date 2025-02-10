@@ -1,11 +1,5 @@
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
+.body{
+  background-color: rgb(246, 202, 144);
 }
 
 .pulse {
@@ -25,4 +19,27 @@ body {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.font-size{
+  font-size: small;
+}
+
+.card-bottom-line {
+  border-bottom: 2px solid #ccc;
+  margin-right: auto;
+  margin-left: auto;
+  width: 98.5%;
+}
+
+.mar-Input{
+  margin-left: 0.1rem;
+}
+
+.mar-checkmarck {
+  margin-left: -0.3rem;
+}
+
+.mar-trashcan{
+  margin-right: -0.47rem;
 }
