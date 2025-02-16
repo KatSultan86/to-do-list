@@ -32,6 +32,13 @@
   width: 98.5%;
 }
 
+.card-bottom-line-up {
+  border-bottom: 1px solid #ccc;
+  margin-right: auto;
+  margin-left: auto;
+  width: 98.5%;
+}
+
 .subform{
   margin-bottom: 0.08rem;
 }
@@ -47,3 +54,49 @@
 .mar-trashcan{
   margin-right: -0.5rem;
 }
+
+
+.mar-plus {
+  margin-right: 1rem;
+}
+
+
+.neon-shadow {
+  box-shadow: 0 0 0.5rem 0.2rem rgba(61, 61, 77, 0.2);
+}
+
+.header{
+  color: #a1a1a1;
+}
+
+
+
+/* .bg-card-form{
+  background-color: #3c4f58;
+} */
+
+
+.custom-input {
+  display: flex !important;
+  flex-direction: row;
+  padding: 0.6rem;
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex: 1;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+
+  background-color: transparent;
+  border: none;
+}
+
+.flex-item:focus {
+  background-color: transparent;
+  border:none;
+  outline: none;
+}
+
+
+
