@@ -3,23 +3,10 @@ import ToDoListcard from "./components/ToDoListcard";
 import { useState } from "react";
 
 function App() {
-  const [item, setItem] = useState([
-    {
-      id: 1001,
-      item: "New item-1",
-      isCompleted: true,
-    },
-    {
-      id: 1002,
-      item: "New item-2",
-      isCompleted: true,
-    },
-    {
-      id: 1003,
-      item: "New item-3",
-      isCompleted: true,
-    },
-  ]);
+  const [item, setItem] = useState([]);
+
+  //set up the state for completed items
+  const [completeItem, setCompleteItem] = useState(null);
 
   const addNewToDoItem = (newItem) => {
     //we CAN NOT use Push because the useState is immutable and always stays as is
@@ -29,6 +16,7 @@ function App() {
     // newItem ----> adds a new one
     console.log("Adding new item", newItem);
     setItem((prev) => [...prev, newItem]);
+    console.log(item);
   };
 
   const removeItem = (id) => {
@@ -37,12 +25,39 @@ function App() {
     setItem((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const completedItem = (itemToMarkAsCompleted) => {
+    console.log("Item change: ", itemToMarkAsCompleted);
+    setItem((prevItems) =>
+      prevItems.map((currItem) => {
+        if (currItem.id === itemToMarkAsCompleted.id) {
+          console.log(
+            `Item with id ${itemToMarkAsCompleted.id} found. Changing the isCompleted...`
+          );
+          return { ...currItem, isCompleted: !currItem.isCompleted };
+        }
+
+        return currItem;
+      })
+    );
+    console.log("State after change: ", item);
+  };
+
   return (
     <>
       <SubmissionForm addNewToDoItem={addNewToDoItem} />
-      <ToDoListcard item={item} removeItem={removeItem} />
+      <ToDoListcard
+        item={item}
+        removeItem={removeItem}
+        completedItem={completedItem}
+      />
     </>
   );
 }
 
 export default App;
+
+{
+  /* <div className="text-decoration-line-through">
+  {setItem((item) => item.id !== id)}
+</div>; */
+}

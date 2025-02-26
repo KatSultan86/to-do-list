@@ -22,7 +22,7 @@
 }
 
 .font-size{
-  font-size: small;
+  font-size: small !important;
 }
 
 .card-bottom-line {
@@ -48,7 +48,7 @@
 }
 
 .mar-checkmarck {
-  margin-left: -0.3rem;
+  margin-left: -0.35rem;
 }
 
 .mar-trashcan{
@@ -67,6 +67,11 @@
 
 .header{
   color: #a1a1a1;
+}
+
+button:disabled {
+  border: none; 
+ 
 }
 
 
