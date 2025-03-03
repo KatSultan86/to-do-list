@@ -1,5 +1,24 @@
-.body{
-  background-color: rgb(246, 202, 144);
+.body, html{
+  height: 100%;
+  background-color: #131313;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.bottom{
+  background-color: #1b1b1b;
+  height: 100%;
+
+}
+
+
+.text-dark-color{
+  color:#536f83
+}
+
+.text-dark-color:hover{
+  color: #536f83;
 }
 
 .pulse {
@@ -45,6 +64,7 @@
 
 .mar-Input{
   margin-left: 0.2rem;
+
 }
 
 .mar-checkmarck {
@@ -86,6 +106,11 @@ button:disabled {
   flex-direction: row;
   padding: 0.6rem;
   justify-content: space-between;
+  background-color: #424f58;
+}
+
+.custom-color {
+  background-color: #424f58;
 }
 
 .flex-item {

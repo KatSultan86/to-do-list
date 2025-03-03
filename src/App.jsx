@@ -1,6 +1,7 @@
 import SubmissionForm from "./components/SubmissionForm";
 import ToDoListcard from "./components/ToDoListcard";
 import { useState } from "react";
+import ThemeToggler from "./components/ThemeToggler";
 
 function App() {
   const [item, setItem] = useState([]);
@@ -42,10 +43,17 @@ function App() {
     console.log("State after change: ", item);
   };
 
+  const itemCount = () => {
+    const activeItems = item.filter((currItem) => !currItem.isCompleted);
+    return activeItems.length;
+  };
+
   return (
     <>
+      <ThemeToggler />
       <SubmissionForm addNewToDoItem={addNewToDoItem} />
       <ToDoListcard
+        itemCount={itemCount}
         item={item}
         removeItem={removeItem}
         completedItem={completedItem}
@@ -55,9 +63,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <div className="text-decoration-line-through">
-  {setItem((item) => item.id !== id)}
-</div>; */
-}

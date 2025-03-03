@@ -47,7 +47,6 @@ function SubmissionForm({ addNewToDoItem }) {
     //reset the State
     settodoInput("");
     setValidInput(false);
-    
   };
 
   const isFormValid = validInput;
