@@ -45,10 +45,7 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
         <ul className="list-group border-0 ">
           {handleFiltering().map((items) =>
             items.component ? (
-              <div className="text-center font-size p-1 opacity-50">
-                No Tasks Available
-                <div className="card-bottom-line-up "></div>
-              </div>
+              <div>{items.component}</div>
             ) : (
               <div key={items.id} className="card-bottom-line ">
                 <li className=" custom-color list-group-item border-0 d-flex justify-content-between bg-card-form">
