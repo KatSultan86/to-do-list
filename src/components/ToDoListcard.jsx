@@ -21,7 +21,16 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
     }
 
     if (filteredItems.length === 0) {
-      filteredItems = [{ component: <BaseHTML itemCount={itemCount} /> }];
+      filteredItems = [
+        {
+          component: (
+            <div className="text-center font-size p-1 opacity-50">
+              No Tasks Available
+              <div className="card-bottom-line-up "></div>
+            </div>
+          ),
+        },
+      ];
       return filteredItems;
     }
 
