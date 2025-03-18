@@ -1,10 +1,30 @@
 import SubmissionForm from "./components/SubmissionForm";
 import ToDoListcard from "./components/ToDoListcard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeToggler from "./components/ThemeToggler";
 
 function App() {
   const [item, setItem] = useState([]);
+  const USER_ID = 48;
+
+  //to fetch all ToDo-s from the API
+  const fetchAllToDos = async () => {
+    try {
+      const response = await fetch(
+        "http://yollstudentapi.com/api/todos?user_id=" + USER_ID
+      );
+      const data = await response.json();
+      console.log("Data fetched: ", data);
+      setItem(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //useEffect is a hook that acts on some hanges on dependencies that we specify
+  useEffect(() => {
+    fetchAllToDos();
+  }, []);
 
   //set up the state for completed items
   const [completeItem, setCompleteItem] = useState(null);

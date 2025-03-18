@@ -34,8 +34,8 @@ function SubmissionForm({ addNewToDoItem }) {
     const newInput = {
       //we need to use the unique ID for each element
       id: Date.now(),
-      item: todoInput,
-      isCompleted: false,
+      title: todoInput,
+      completed: false,
     };
 
     //"newToDoItem" is a function defined at the App level. We are passing "newMovie" object as a parameter

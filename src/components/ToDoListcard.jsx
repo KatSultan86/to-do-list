@@ -11,11 +11,11 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
     let filteredItems = [];
 
     if (filterType === "completed") {
-      filteredItems = item.filter((currItem) => currItem.isCompleted);
+      filteredItems = item.filter((currItem) => currItem.completed);
     } else if (filterType === "active") {
-      filteredItems = item.filter((currItem) => !currItem.isCompleted);
+      filteredItems = item.filter((currItem) => !currItem.completed);
     } else if (filterType === "clearCompleted") {
-      filteredItems = item.filter((compItem) => !compItem.isCompleted);
+      filteredItems = item.filter((compItem) => !compItem.completed);
     } else {
       filteredItems = item;
     }
@@ -55,7 +55,7 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
                       completedItem(items);
                     }}
                   >
-                    {items.isCompleted ? (
+                    {items.completed ? (
                       <BsCheckCircleFill size={"1.3rem"} />
                     ) : (
                       <IoMdRadioButtonOff size={"1.7rem"} />
@@ -63,10 +63,10 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
                   </div>
                   <span
                     className={`${
-                      items.isCompleted ? "text-decoration-line-through" : ""
+                      items.completed ? "text-decoration-line-through" : ""
                     } me-auto ms-2 ps-1 opacity-75`}
                   >
-                    {items.item}
+                    {items.title}
                   </span>
                   <button
                     onClick={() => {
