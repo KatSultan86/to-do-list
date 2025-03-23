@@ -45,6 +45,7 @@ function App() {
       if (!response.ok) {
         throw new Error("Error: " + response.status);
       }
+      fetchAllToDos();
     } catch (e) {
       console.log(e);
     }

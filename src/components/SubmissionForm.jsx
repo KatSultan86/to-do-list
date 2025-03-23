@@ -21,7 +21,7 @@ function SubmissionForm({ addNewToDoItem, fetchAllToDos }) {
     setValidInput(isValid);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     //to not allow to refresh the page when we hit "submit" the form
     e.preventDefault();
 
@@ -51,7 +51,6 @@ function SubmissionForm({ addNewToDoItem, fetchAllToDos }) {
     //reset the State
     settodoInput("");
     setValidInput(false);
-    fetchAllToDos();
   };
 
   const isFormValid = validInput;
