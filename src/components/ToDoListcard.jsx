@@ -4,8 +4,25 @@ import { IoMdRadioButtonOff } from "react-icons/io";
 import { useState } from "react";
 import BaseHTML from "./BaseHTML";
 
-function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
+function ToDoListcard({ item, fetchAllToDos, completedItem, itemCount }) {
+  const USER_ID = 48;
   const [filterType, setFilterType] = useState("all");
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://yollstudentapi.com/api/todos/${item.id}?user_id=${USER_ID}`,
+        { method: "DELETE" }
+      );
+      if (!response.ok) {
+        throw new Error(`Error deleting the item: ${item}`);
+      }
+      console.log("Fetching all ToDos.....");
+      fetchAllToDos();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   function handleFiltering() {
     let filteredItems = [];
@@ -70,7 +87,7 @@ function ToDoListcard({ item, removeItem, completedItem, itemCount }) {
                   </span>
                   <button
                     onClick={() => {
-                      removeItem(items.id);
+                      handleDelete();
                     }}
                     className="mar-trashcan btn opacity-25"
                   >

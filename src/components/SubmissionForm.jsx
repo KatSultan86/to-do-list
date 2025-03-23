@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import { IoMdRadioButtonOff } from "react-icons/io";
 import { isValidItem } from "../utils.js";
 
-function SubmissionForm({ addNewToDoItem }) {
+function SubmissionForm({ addNewToDoItem, fetchAllToDos }) {
   const [todoInput, settodoInput] = useState("");
 
   //state that controls the validity of the input
@@ -21,7 +21,7 @@ function SubmissionForm({ addNewToDoItem }) {
     setValidInput(isValid);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     //to not allow to refresh the page when we hit "submit" the form
     e.preventDefault();
 
@@ -29,8 +29,6 @@ function SubmissionForm({ addNewToDoItem }) {
     if (!isValidItem(todoInput)) {
       return;
     }
-
-    //to add a new object to the state (a list of items in the ToDoListcard.jsx)
     const newInput = {
       //we need to use the unique ID for each element
       id: Date.now(),
@@ -38,15 +36,22 @@ function SubmissionForm({ addNewToDoItem }) {
       completed: false,
     };
 
+    const requestBody = {
+      title: todoInput,
+      completed: false,
+      user_id: 48,
+    };
+
     //"newToDoItem" is a function defined at the App level. We are passing "newMovie" object as a parameter
     //to add to the array of objects in the App
-    addNewToDoItem(newInput);
+    addNewToDoItem(requestBody);
 
     console.log("Added new item", newInput);
 
     //reset the State
     settodoInput("");
     setValidInput(false);
+    fetchAllToDos();
   };
 
   const isFormValid = validInput;

@@ -15,7 +15,7 @@ function App() {
       );
       const data = await response.json();
       console.log("Data fetched: ", data);
-      setItem(data);
+      setItem(Array.isArray(data) ? data : []);
     } catch (err) {
       console.log(err);
     }
@@ -29,22 +29,32 @@ function App() {
   //set up the state for completed items
   const [completeItem, setCompleteItem] = useState(null);
 
-  const addNewToDoItem = (newItem) => {
-    //we CAN NOT use Push because the useState is immutable and always stays as is
-    // item.push(newItem);
-    //to push a new element from the input field
-    //..prev ---> adds all ellements in the array that were previously entered
-    // newItem ----> adds a new one
-    console.log("Adding new item", newItem);
-    setItem((prev) => [...prev, newItem]);
-    console.log(item);
+  //to add a new object to the state (a list of items in the ToDoListcard.jsx)
+
+  const addNewToDoItem = async (requestBody) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      };
+      const response = await fetch(
+        "http://yollstudentapi.com/api/todos",
+        options
+      );
+      if (!response.ok) {
+        throw new Error("Error: " + response.status);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const removeItem = (id) => {
-    console.log("Deleting item:", id);
+  // const removeItem = (id) => {
+  //   console.log("Deleting item:", id);
 
-    setItem((prev) => prev.filter((item) => item.id !== id));
-  };
+  //   setItem((prev) => prev.filter((item) => item.id !== id));
+  // };
 
   const completedItem = (itemToMarkAsCompleted) => {
     console.log("Item change: ", itemToMarkAsCompleted);
@@ -54,7 +64,7 @@ function App() {
           console.log(
             `Item with id ${itemToMarkAsCompleted.id} found. Changing the isCompleted...`
           );
-          return { ...currItem, isCompleted: !currItem.isCompleted };
+          return { ...currItem, completed: !currItem.completed };
         }
 
         return currItem;
@@ -64,18 +74,21 @@ function App() {
   };
 
   const itemCount = () => {
-    const activeItems = item.filter((currItem) => !currItem.isCompleted);
+    const activeItems = item.filter((currItem) => !currItem.completed);
     return activeItems.length;
   };
 
   return (
     <>
       <ThemeToggler />
-      <SubmissionForm addNewToDoItem={addNewToDoItem} />
+      <SubmissionForm
+        addNewToDoItem={addNewToDoItem}
+        fetchAllToDos={fetchAllToDos}
+      />
       <ToDoListcard
         itemCount={itemCount}
         item={item}
-        removeItem={removeItem}
+        fetchAllToDos={fetchAllToDos}
         completedItem={completedItem}
       />
     </>
