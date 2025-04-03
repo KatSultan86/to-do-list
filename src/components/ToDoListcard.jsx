@@ -4,24 +4,39 @@ import { IoMdRadioButtonOff } from "react-icons/io";
 import { useState } from "react";
 import BaseHTML from "./BaseHTML";
 
-function ToDoListcard({ item, fetchAllToDos, completedItem, itemCount }) {
+function ToDoListcard({
+  item,
+  currentItem,
+  fetchAllToDos,
+  completedItem,
+  itemCount,
+}) {
   const USER_ID = 48;
   const [filterType, setFilterType] = useState("all");
 
-  const handleDelete = async () => {
+  const handleDelete = async (currentItemId) => {
     try {
       const response = await fetch(
-        `http://yollstudentapi.com/api/todos/${item.id}?user_id=${USER_ID}`,
+        `http://yollstudentapi.com/api/todos/${currentItemId}?user_id=${USER_ID}`,
         { method: "DELETE" }
       );
       if (!response.ok) {
-        throw new Error(`Error deleting the item: ${item}`);
+        throw new Error(`Error deleting the item: ${currentItemId}`);
       }
       console.log("Fetching all ToDos.....");
       fetchAllToDos();
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const handleDeletComleted = async () => {
+    item.forEach((element) => {
+      if (element.completed) {
+        console.log("Deliting the element......");
+        handleDelete(element.id);
+      }
+    });
   };
 
   function handleFiltering() {
@@ -31,8 +46,6 @@ function ToDoListcard({ item, fetchAllToDos, completedItem, itemCount }) {
       filteredItems = item.filter((currItem) => currItem.completed);
     } else if (filterType === "active") {
       filteredItems = item.filter((currItem) => !currItem.completed);
-    } else if (filterType === "clearCompleted") {
-      filteredItems = item.filter((compItem) => !compItem.completed);
     } else {
       filteredItems = item;
     }
@@ -87,7 +100,7 @@ function ToDoListcard({ item, fetchAllToDos, completedItem, itemCount }) {
                   </span>
                   <button
                     onClick={() => {
-                      handleDelete();
+                      handleDelete(items.id);
                     }}
                     className="mar-trashcan btn opacity-25"
                   >
@@ -129,7 +142,8 @@ function ToDoListcard({ item, fetchAllToDos, completedItem, itemCount }) {
               </button>
             </div>
             <button
-              onClick={() => setFilterType("clearCompleted")}
+              id="clearCompleted"
+              onClick={() => handleDeletComleted()}
               className={`${
                 filterType === "clearCompleted" ? "fw-bolder" : ""
               } btn border-0 m-0 p-0 font-size`}

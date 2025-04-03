@@ -129,4 +129,8 @@ button:disabled {
 }
 
 
+#clearCompleted:hover{
+  font-weight: 700;
+}
+
 
